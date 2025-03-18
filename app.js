@@ -46,9 +46,49 @@ const GRATITUDE_EMOJIS = {
   "nature": ["🌳", "🌊", "🏞️", "🦜", "🐝", "🌸", "☀️", "🌙", "🌿", "🍂"]
 };
 
-// OpenAI API configuration
-const OPENAI_API_KEY = 'sk-proj-EKl6QzNoRk3dFhtiJtl7T3BlbkFJu29kXbxBsZRcqmz6PCwd';
-const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
+// Hardcoded gratitude suggestions
+const GRATITUDE_SUGGESTIONS = [
+  { text: "Someone who helped me solve a problem today", type: "help" },
+  { text: "A friend or family member who supported me", type: "kindness" },
+  { text: "A mentor or teacher who shared knowledge with me", type: "growth" },
+  { text: "A colleague who made my work easier", type: "help" },
+  { text: "A stranger who showed unexpected kindness", type: "kindness" },
+  { text: "Someone who listened when I needed to talk", type: "help" },
+  { text: "A person who gave me helpful feedback", type: "growth" },
+  { text: "Someone who believed in me when I doubted myself", type: "kindness" },
+  { text: "A friend who checked in on me", type: "kindness" },
+  { text: "Someone who shared their expertise with me", type: "help" },
+  { text: "A person who taught me something valuable", type: "growth" },
+  { text: "Someone who helped lighten my workload", type: "help" },
+  { text: "A person who inspired me to grow", type: "growth" },
+  { text: "Someone who showed me patience", type: "kindness" },
+  { text: "A person who helped me see things differently", type: "growth" },
+  { text: "Someone who celebrated my success with me", type: "kindness" },
+  { text: "A person who offered me guidance", type: "help" },
+  { text: "Someone who took time to help me", type: "help" },
+  { text: "A person who encouraged me to keep going", type: "kindness" },
+  { text: "Someone who shared resources with me", type: "help" },
+  { text: "A person who supported my decision", type: "kindness" },
+  { text: "Someone who made me laugh today", type: "kindness" },
+  { text: "A teacher who challenged me to think differently", type: "growth" },
+  { text: "Someone who gave me space when I needed it", type: "kindness" },
+  { text: "A person who recognized my effort", type: "kindness" },
+  { text: "Someone who answered my questions", type: "help" },
+  { text: "A person who showed genuine interest in my ideas", type: "kindness" },
+  { text: "Someone who provided useful information", type: "help" },
+  { text: "A person who brought positive energy to my day", type: "kindness" },
+  { text: "Someone who inspired me with their actions", type: "growth" },
+  { text: "A person who forgave my mistake", type: "kindness" },
+  { text: "Someone who appreciated my work", type: "kindness" },
+  { text: "A person who helped me understand a complex topic", type: "help" },
+  { text: "Someone who showed compassion when I struggled", type: "kindness" },
+  { text: "A person who gently corrected me", type: "growth" },
+  { text: "Someone who advocated for me", type: "kindness" },
+  { text: "A person who collaborated with me effectively", type: "help" },
+  { text: "Someone who respected my boundaries", type: "kindness" },
+  { text: "A person who showed enthusiasm for my project", type: "kindness" },
+  { text: "Someone who helped me stay focused", type: "help" }
+];
 
 // State
 let notes = [];
@@ -274,22 +314,83 @@ function celebrateNoteAdded() {
     jarBody.classList.remove('jar-celebration');
   }, 1200);
   
-  // Create confetti
-  createConfetti();
-  
-  // Create floating emojis
-  createFloatingEmojis();
+  // Create top celebration effects
+  createTopConfetti();
+  createTopEmojis();
   
   // Show appreciation toast
   showAppreciationToast();
 }
 
-function createConfetti() {
+function createTopConfetti() {
   // Clear any existing confetti
   confettiContainer.innerHTML = '';
   
   // Create new confetti pieces
-  const confettiCount = 60;
+  const confettiCount = 80; // More confetti for a more spectacular effect
+  const confettiShapes = ['circle', 'square', 'triangle', 'star'];
+  
+  for (let i = 0; i < confettiCount; i++) {
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti top-confetti';
+    
+    // Random properties
+    const color = getRandomColor();
+    const left = getRandomInt(0, 100); // Spread across the entire width
+    const delay = getRandomInt(0, 500); // Staggered start
+    const fallDuration = getRandomInt(2000, 5000);
+    const shakeDuration = getRandomInt(500, 1500);
+    const size = getRandomInt(6, 14); // Slightly larger for better visibility
+    const shape = confettiShapes[Math.floor(Math.random() * confettiShapes.length)];
+    
+    // Apply styles
+    confetti.style.setProperty('--confetti-color', color);
+    confetti.style.setProperty('--fall-duration', `${fallDuration}ms`);
+    confetti.style.setProperty('--shake-duration', `${shakeDuration}ms`);
+    confetti.style.setProperty('--fall-delay', `${delay}ms`);
+    confetti.style.left = `${left}%`;
+    confetti.style.top = '0'; // Start from the top
+    confetti.style.width = `${size}px`;
+    confetti.style.height = `${size}px`;
+    
+    // Add shape styles
+    if (shape === 'square') {
+      confetti.style.borderRadius = '2px';
+    } else if (shape === 'triangle') {
+      confetti.style.width = '0';
+      confetti.style.height = '0';
+      confetti.style.borderLeft = `${size}px solid transparent`;
+      confetti.style.borderRight = `${size}px solid transparent`;
+      confetti.style.borderBottom = `${size * 1.5}px solid ${color}`;
+      confetti.style.backgroundColor = 'transparent';
+    } else if (shape === 'star') {
+      confetti.innerHTML = '★';
+      confetti.style.fontSize = `${size * 1.5}px`;
+      confetti.style.width = 'auto';
+      confetti.style.height = 'auto';
+      confetti.style.color = color;
+      confetti.style.backgroundColor = 'transparent';
+    }
+    
+    // Add to container
+    confettiContainer.appendChild(confetti);
+    
+    // Remove after animation completes
+    setTimeout(() => {
+      if (confetti.parentNode === confettiContainer) {
+        confettiContainer.removeChild(confetti);
+      }
+    }, fallDuration + delay + 100);
+  }
+  
+  // Also create some confetti around the jar for a focused celebration effect
+  createConfetti();
+}
+
+// Create confetti around the jar (existing functionality)
+function createConfetti() {
+  // Create new confetti pieces around the jar
+  const confettiCount = 40;
   const confettiShapes = ['circle', 'square', 'triangle'];
   
   for (let i = 0; i < confettiCount; i++) {
@@ -299,7 +400,7 @@ function createConfetti() {
     // Random properties
     const color = getRandomColor();
     const left = getRandomInt(0, 100);
-    const fallDuration = getRandomInt(2000, 5000);
+    const fallDuration = getRandomInt(2000, 4000);
     const shakeDuration = getRandomInt(500, 1500);
     const size = getRandomInt(6, 12);
     const shape = confettiShapes[Math.floor(Math.random() * confettiShapes.length)];
@@ -336,8 +437,48 @@ function createConfetti() {
   }
 }
 
+// Raining emoji celebration from the top
+function createTopEmojis() {
+  const emojiCount = 15; // Number of emojis falling from top
+  
+  for (let i = 0; i < emojiCount; i++) {
+    const emoji = document.createElement('div');
+    emoji.className = 'emoji top-emoji';
+    emoji.textContent = getRandomItem(EMOJIS);
+    
+    // Position across the screen at the top
+    const left = getRandomInt(5, 95); // % from left
+    const delay = getRandomInt(0, 800); // ms delay
+    const fallDuration = getRandomInt(2000, 4000); // ms duration
+    const rotation = getRandomInt(-60, 60) + 'deg';
+    const size = getRandomInt(20, 40); // px
+    
+    // Apply styles
+    emoji.style.left = `${left}%`;
+    emoji.style.top = '0';
+    emoji.style.fontSize = `${size}px`;
+    emoji.style.setProperty('--fall-delay', `${delay}ms`);
+    emoji.style.setProperty('--fall-duration', `${fallDuration}ms`);
+    emoji.style.setProperty('--rotation', rotation);
+    
+    // Add to document
+    document.body.appendChild(emoji);
+    
+    // Remove after animation completes
+    setTimeout(() => {
+      if (emoji.parentNode === document.body) {
+        document.body.removeChild(emoji);
+      }
+    }, fallDuration + delay + 100);
+  }
+  
+  // Also create emojis around the jar (existing functionality)
+  createFloatingEmojis();
+}
+
+// Floating emojis around the jar (existing functionality)
 function createFloatingEmojis() {
-  const emojiCount = 12;
+  const emojiCount = 8; // Reduced count as we now have top emojis too
   const jarRect = jarBody.getBoundingClientRect();
   
   for (let i = 0; i < emojiCount; i++) {
@@ -560,7 +701,7 @@ function showToast(message) {
 }
 
 // Suggestion Functions
-async function loadSuggestions() {
+function loadSuggestions() {
   // Clear any existing suggestions
   suggestionsListEl.innerHTML = '';
   
@@ -568,110 +709,59 @@ async function loadSuggestions() {
   isLoadingSuggestions = true;
   showSuggestionsLoading();
   
-  try {
-    // Fetch AI-generated suggestions from OpenAI API
-    const suggestions = await fetchAISuggestions();
-    currentSuggestions = suggestions;
-    
-    // Add each suggestion to the DOM
-    suggestions.forEach((suggestion, index) => {
-      const suggestionEl = createSuggestionElement(suggestion, index);
-      suggestionsListEl.appendChild(suggestionEl);
-    });
-    
-    // Show success toast
-    showToast('New AI-generated gratitude prompts loaded!');
-  } catch (error) {
-    console.error('Error loading AI suggestions:', error);
-    showToast('Error loading AI suggestions. Please try again.');
-    
-    // Clear loading state in case of error
-    suggestionsListEl.innerHTML = `
-      <div class="col-span-2 flex justify-center items-center py-4">
-        <span class="text-red-300">❌ Could not load AI suggestions. Click refresh to try again.</span>
-      </div>
-    `;
-  } finally {
-    // Hide loading state
-    isLoadingSuggestions = false;
-    reloadSuggestionsBtn.classList.remove('loading');
-    reloadSuggestionsBtn.disabled = false;
-  }
+  // Simulate loading for UI feedback
+  setTimeout(() => {
+    try {
+      // Get random suggestions from our hardcoded list
+      const suggestions = getRandomSuggestions();
+      currentSuggestions = suggestions;
+      
+      // Add each suggestion to the DOM
+      suggestions.forEach((suggestion, index) => {
+        const suggestionEl = createSuggestionElement(suggestion, index);
+        suggestionsListEl.appendChild(suggestionEl);
+      });
+      
+      // Show success toast
+      showToast('Fresh gratitude prompts loaded!');
+    } catch (error) {
+      console.error('Error loading suggestions:', error);
+      showToast('Error loading suggestions. Please try again.');
+    } finally {
+      // Hide loading state
+      isLoadingSuggestions = false;
+      reloadSuggestionsBtn.classList.remove('loading');
+      reloadSuggestionsBtn.disabled = false;
+    }
+  }, 800); // Simulate a short loading time
 }
 
 function showSuggestionsLoading() {
+  
   // Also update the reload button state
   reloadSuggestionsBtn.classList.add('loading');
   reloadSuggestionsBtn.disabled = true;
 }
 
-// Fetch AI-generated suggestions from OpenAI API
-async function fetchAISuggestions() {
-  // Create abort controller for timeout
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
+// Get random suggestions from our hardcoded list
+function getRandomSuggestions(count = 5, focusType = 'all') {
+  // Filter by focus type if specified
+  const filteredSuggestions = focusType === 'all' 
+    ? GRATITUDE_SUGGESTIONS 
+    : GRATITUDE_SUGGESTIONS.filter(s => s.type === focusType || s.type === 'kindness');
   
-  try {
-    const response = await fetch(OPENAI_API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPENAI_API_KEY}`
-      },
-      body: JSON.stringify({
-        model: "gpt-3.5-turbo",
-        messages: [
-          {
-            role: "system",
-            content: "You are a gratitude assistant. Generate 5 unique gratitude prompts that focus on support, help and kindness from others. Format your response as a JSON array of objects with 'text' and 'type' properties. Types should be one of: 'help', 'kindness', 'growth'. Example format: [{\"text\":\"Someone who helped you today\",\"type\":\"help\"}]"
-          },
-          {
-            role: "user",
-            content: "Generate 5 unique gratitude prompts focusing on help and support from others."
-          }
-        ],
-        temperature: 0.7,
-        max_tokens: 300
-      }),
-      signal: controller.signal
-    });
-    
-    clearTimeout(timeoutId);
-    
-    if (!response.ok) {
-      throw new Error(`API request failed with status ${response.status}`);
-    }
-    
-    const data = await response.json();
-    const content = data.choices[0].message.content;
-    
-    // Parse the JSON response
-    let parsedSuggestions;
-    try {
-      parsedSuggestions = JSON.parse(content);
-    } catch (error) {
-      // If JSON parsing fails, try to extract the array using regex
-      const match = content.match(/\[\s*\{.*\}\s*\]/s);
-      if (match) {
-        parsedSuggestions = JSON.parse(match[0]);
-      } else {
-        throw new Error("Failed to parse suggestions from API response");
-      }
-    }
-    
-    // Add emoji icons to each suggestion
-    return parsedSuggestions.map(suggestion => {
-      const type = suggestion.type || 'help';
-      const emoji = getRandomItem(GRATITUDE_EMOJIS[type] || GRATITUDE_EMOJIS.help);
-      return {
-        ...suggestion,
-        icon: emoji
-      };
-    });
-  } catch (error) {
-    console.error("API request error:", error);
-    throw error;
-  }
+  // Shuffle the array to get random suggestions
+  const shuffled = [...filteredSuggestions].sort(() => 0.5 - Math.random());
+  
+  // Get a subset of suggestions and add emojis
+  return shuffled.slice(0, count).map(suggestion => {
+    const type = suggestion.type || 'help';
+    const emoji = getRandomItem(GRATITUDE_EMOJIS[type] || GRATITUDE_EMOJIS.help);
+    return {
+      ...suggestion,
+      icon: emoji
+    };
+  });
 }
 
 function createSuggestionElement(suggestion, index) {
@@ -728,16 +818,11 @@ function selectSuggestion(index) {
 async function handleReloadSuggestions() {
   if (isLoadingSuggestions) return;
   
-  try {
-    await loadSuggestions();
-    
-    // Reset selected suggestion if any
-    if (selectedSuggestion !== null) {
-      selectedSuggestion = null;
-    }
-  } catch (error) {
-    console.error('Error reloading suggestions:', error);
-    showToast('Could not load AI suggestions. Please try again.');
+  loadSuggestions();
+  
+  // Reset selected suggestion if any
+  if (selectedSuggestion !== null) {
+    selectedSuggestion = null;
   }
 }
 

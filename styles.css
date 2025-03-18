@@ -460,7 +460,13 @@ button:hover .emoji-subtle {
 }
 
 .jar-celebration {
-  animation: celebrate 1.2s ease-in-out;
+  animation: jarGlow 1.2s ease-in-out;
+}
+
+@keyframes jarGlow {
+  0% { filter: drop-shadow(0 0 0px rgba(192, 132, 252, 0)); }
+  50% { filter: drop-shadow(0 0 20px rgba(192, 132, 252, 0.8)); }
+  100% { filter: drop-shadow(0 0 0px rgba(192, 132, 252, 0)); }
 }
 
 /* Confetti Animation */
@@ -477,15 +483,16 @@ button:hover .emoji-subtle {
 
 .confetti {
   position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: var(--confetti-color);
-  opacity: 0.8;
-  top: -10px;
-  animation: confetti-fall var(--fall-duration) linear forwards, confetti-shake var(--shake-duration) ease-in-out infinite alternate;
+  background-color: var(--confetti-color, #f0abfc);
+  border-radius: 50%;
+  animation: confettiFall var(--fall-duration, 3000ms) ease-in forwards, 
+             confettiShake var(--shake-duration, 1000ms) ease-in-out infinite;
+  z-index: 50;
+  will-change: transform;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
-@keyframes confetti-fall {
+@keyframes confettiFall {
   0% {
     top: -10px;
     opacity: 1;
@@ -499,7 +506,7 @@ button:hover .emoji-subtle {
   }
 }
 
-@keyframes confetti-shake {
+@keyframes confettiShake {
   0% {
     transform: translateX(0) rotate(0deg);
   }
@@ -932,4 +939,54 @@ button:hover .emoji-subtle {
 
 #reload-suggestions.loading .emoji-subtle {
   animation: spin 1s linear infinite;
+}
+
+/* Top confetti animation */
+.top-confetti {
+  position: fixed !important;
+  animation: topConfettiFall var(--fall-duration, 3000ms) ease-in forwards, 
+             confettiShake var(--shake-duration, 1000ms) ease-in-out infinite;
+  animation-delay: var(--fall-delay, 0ms);
+  z-index: 100;
+  transform-origin: center;
+}
+
+@keyframes topConfettiFall {
+  0% {
+    transform: translateY(-5px) rotate(0deg);
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(100vh) rotate(90deg);
+    opacity: 0;
+  }
+}
+
+/* Top emoji animation */
+.top-emoji {
+  position: fixed !important;
+  z-index: 100;
+  animation: emojiRain var(--fall-duration, 3000ms) ease-in forwards;
+  animation-delay: var(--fall-delay, 0ms);
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+}
+
+@keyframes emojiRain {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(var(--rotation, 90deg));
+    opacity: 0;
+  }
 } 
