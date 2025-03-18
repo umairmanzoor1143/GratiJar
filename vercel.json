@@ -1,17 +1,22 @@
 {
   "version": 2,
-  "buildCommand": "",
-  "devCommand": "",
-  "installCommand": "",
-  "public": true,
-  "outputDirectory": "",
-  "github": {
-    "silent": true
-  },
-  "routes": [
+  "builds": [
     {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "src": "**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "s-maxage=1, stale-while-revalidate=59"
+        }
+      ]
     }
   ]
 } 

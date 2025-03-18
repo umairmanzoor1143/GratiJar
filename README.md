@@ -13,6 +13,7 @@ GratiJar is a minimalist web app that helps you cultivate a daily gratitude prac
 - **Zero Effort**: No accounts, no passwords - just write and go. Data saves locally in your browser.
 - **Rewind Mode**: Shuffle through past entries with a delightful animation.
 - **Export**: View all your gratitude notes organized by month and year.
+- **Helpful Suggestions**: Get thoughtful gratitude prompts to inspire your daily practice.
 
 ## 🔧 Technology
 
@@ -88,6 +89,7 @@ GratiJar respects your privacy:
 - No data is sent to any server
 - All your notes are stored only in your browser's localStorage
 - No analytics or tracking
+- No API keys or external services required
 
 ## 🌱 Future Ideas
 
@@ -107,7 +109,7 @@ GratiJar respects your privacy:
 
 ## Deployment on Vercel
 
-This app is set up to be easily deployed on Vercel with secure handling of the OpenAI API key.
+This app is set up to be easily deployed on Vercel.
 
 ### Steps to deploy:
 
@@ -116,13 +118,7 @@ This app is set up to be easily deployed on Vercel with secure handling of the O
 2. **Sign up for a Vercel account** (if you don't have one)
    - Go to [vercel.com](https://vercel.com) and sign up
 
-3. **Get an OpenAI API key**
-   - Go to [platform.openai.com](https://platform.openai.com)
-   - Sign up or log in
-   - Navigate to API keys
-   - Create a new secret key
-
-4. **Deploy on Vercel**
+3. **Deploy on Vercel**
    - Click "New Project" in Vercel
    - Import your GitHub repository
    - Configure the project:
@@ -130,26 +126,20 @@ This app is set up to be easily deployed on Vercel with secure handling of the O
      - Root Directory: ./
      - Build Command: (leave empty)
      - Output Directory: (leave empty)
-   - Add Environment Variable:
-     - Name: `OPENAI_API_KEY`
-     - Value: Your OpenAI API key from step 3
    - Click "Deploy"
 
-5. **Your app is now live!**
+4. **Your app is now live!**
    - Vercel will give you a URL to access your app
-   - The OpenAI API key is securely stored and not exposed in the client-side code
 
 ## Local Development
 
 To run this project locally:
 
 1. Clone the repository
-2. Copy `.env.example` to `.env` and add your OpenAI API key
-3. Serve the files with a local server (e.g., using Live Server extension in VS Code)
+2. Serve the files with a local server (e.g., using Live Server extension in VS Code)
 
 ## Security
 
-- The app uses Vercel Serverless Functions to keep your OpenAI API key secure
-- API calls are made from the server side, not the client
-- The key is stored as an environment variable in Vercel
-- A fallback system ensures the app works even if the API call fails 
+- The app is a pure static site with no server-side components
+- All data is stored locally in the browser
+- No external API calls are made 
