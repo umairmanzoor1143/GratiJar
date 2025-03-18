@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,20 +12,32 @@
     <script defer src="/_vercel/insights/script.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <meta name="theme-color" content="#312e81">
 </head>
 
-<body class="bg-gradient-to-br from-indigo-900 to-purple-900 min-h-screen flex flex-col items-center text-white font-sans">
+<body
+    class="bg-gradient-to-br from-indigo-900 to-purple-900 min-h-screen flex flex-col items-center text-white font-sans">
     <div class="sparkle-background"></div>
-    
+
     <header class="w-full max-w-4xl px-6 py-10 text-center">
-        <h1 class="text-5xl md:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-purple-300">✨ GratiJar ✨</h1>
-        <p class="text-xl md:text-2xl animated-tagline tagline-highlight mb-2">One sentence a day to fill your jar of gratitude.</p>
-        <p class="text-purple-200 text-sm md:text-base">🌱 Plant seeds of positivity, watch your happiness grow 🌱</p>
+        <h1
+            class="text-5xl md:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-purple-300">
+            ✨ GratiJar ✨</h1>
+        <p class="text-xl md:text-2xl animated-tagline tagline-highlight mb-2">One sentence a day to fill your jar of
+            gratitude.</p>
+        <p class="text-purple-200 text-sm md:text-base pt-4">🌱 Plant seeds of positivity, watch your happiness grow 🌱</p>
+        <div class="flex justify-center pt-4">
+            <a href="https://www.producthunt.com/posts/gratijar?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-gratijar"
+            target="_blank"><img
+                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=943556&theme=light&t=1742319916715"
+                alt="GratiJar - One&#0032;sentence&#0032;a&#0032;day&#0032;to&#0032;fill&#0032;your&#0032;jar&#0032;of&#0032;gratitude | Product Hunt"
+                style="width: 250px; height: 54px;" width="250" height="54" /></a>
+        </div>
     </header>
 
     <main class="w-full max-w-4xl px-6 flex-grow flex flex-col items-center justify-center gap-8 pb-10">
@@ -38,7 +51,7 @@
             <div class="prompt-container mb-6 text-center">
                 <p class="text-lg text-purple-100">✨ What are you grateful for today? ✨</p>
             </div>
-            
+
             <!-- Suggested Prompts Section -->
             <div class="suggestions-container mb-6">
                 <div class="flex justify-between items-center mb-3">
@@ -51,17 +64,16 @@
                     <!-- Suggestions will be added here dynamically -->
                 </div>
             </div>
-            
+
             <div class="input-container relative">
-                <textarea id="gratitude-input" 
+                <textarea id="gratitude-input"
                     class="w-full p-4 pr-20 text-black rounded-xl bg-purple-800/30 backdrop-blur-md border-2 border-purple-500/50 focus:border-pink-400/70 focus:outline-none  text-lg resize-none transition-all duration-300"
-                    placeholder="Today I'm grateful for..." 
-                    rows="3"
-                    maxlength="200"></textarea>
+                    placeholder="Today I'm grateful for..." rows="3" maxlength="200"></textarea>
                 <div class="absolute right-4 bottom-4 flex items-center gap-2">
                     <span id="char-count" class="text-sm text-purple-300">0/200</span>
                     <button id="save-btn" class="save-button disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M5 12h14"></path>
                             <path d="M12 5l7 7-7 7"></path>
                         </svg>
@@ -84,7 +96,8 @@
             <div class="jar-info text-center mt-4">
                 <p id="jar-count" class="text-lg text-purple-200 glow-subtle">0 notes in your jar</p>
             </div>
-            <button id="shuffle-btn" class="shuffle-btn mt-4 opacity-0 pointer-events-none transition-opacity duration-300">
+            <button id="shuffle-btn"
+                class="shuffle-btn mt-4 opacity-0 pointer-events-none transition-opacity duration-300">
                 <span class="emoji-subtle">🔄</span> Shuffle Memories
             </button>
             <!-- Confetti container for celebration effects -->
@@ -94,6 +107,8 @@
 
     <footer class="w-full max-w-4xl px-6 py-8 text-center text-purple-300 text-sm footer-glass">
         <p>💫 Your memories are stored locally in your browser. No accounts needed. 💫</p>
+       
+        
         <div class="mt-6 flex justify-center gap-6">
             <button id="export-btn" class="footer-btn">
                 <span class="emoji-subtle">📚</span> Export Memories
@@ -102,19 +117,94 @@
                 <span class="emoji-subtle">🗑️</span> Clear Jar
             </button>
         </div>
-        <p class="mt-8 text-purple-400/70">Made with ❤️ • <a href="#" class="hover:text-purple-200 transition-colors">About</a></p>
+        <p class="mt-8 text-purple-400/70">Made with ❤️ • <a href="#"
+                class="hover:text-purple-200 transition-colors">About</a> • <button id="feedback-btn"
+                class="hover:text-purple-200 transition-colors"><span class="emoji-subtle">💬</span> Feedback</button>
+        </p>
     </footer>
 
-    <div id="modal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-purple-900 border border-purple-500/50 rounded-xl p-6 max-w-md w-full max-h-[80vh] overflow-y-auto glass-modal relative">
+    <div id="modal"
+        class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div
+            class="bg-purple-900 border border-purple-500/50 rounded-xl p-6 max-w-md w-full max-h-[80vh] overflow-y-auto glass-modal relative">
             <button id="close-modal" class="absolute right-4 top-4 text-purple-300 hover:text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </button>
-            <h3 id="modal-title" class="text-xl font-bold text-purple-200 text-center pb-4 mb-4 border-b border-purple-500/20">Your Memories</h3>
+            <h3 id="modal-title"
+                class="text-xl font-bold text-purple-200 text-center pb-4 mb-4 border-b border-purple-500/20">Your
+                Memories</h3>
             <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div id="feedback-modal"
+        class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-purple-900 border border-purple-500/50 rounded-xl p-6 max-w-md w-full glass-modal relative">
+            <button id="close-feedback-modal" class="absolute right-4 top-4 text-purple-300 hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <h3 class="text-xl font-bold text-purple-200 text-center pb-4 mb-4 border-b border-purple-500/20">
+                <span class="emoji-subtle">💬</span> Share Your Feedback
+            </h3>
+            <div id="feedback-form-container">
+                <form id="feedback-form" class="space-y-4" action="https://formspree.io/f/mqapaowa" method="POST">
+                    <div>
+                        <label for="feedback-name" class="block text-purple-200 mb-1 text-sm">Name (optional)</label>
+                        <input type="text" id="feedback-name" name="name"
+                            class="w-full p-3 text-black rounded-lg bg-purple-800/30 backdrop-blur-md border-2 border-purple-500/50 focus:border-pink-400/70 focus:outline-none">
+                    </div>
+                    <div>
+                        <label for="feedback-message" class="block text-purple-200 mb-1 text-sm">Your Feedback</label>
+                        <textarea id="feedback-message" name="message"
+                            class="w-full p-3 text-black rounded-lg bg-purple-800/30 backdrop-blur-md border-2 border-purple-500/50 focus:border-pink-400/70 focus:outline-none resize-none"
+                            rows="5" required></textarea>
+                    </div>
+                    <div class="pt-2">
+                        <button type="submit" id="submit-feedback"
+                            class="w-full py-3 px-4 bg-gradient-to-r from-purple-600 to-pink-500 rounded-lg font-medium transition-all hover:from-purple-700 hover:to-pink-600 transform hover:-translate-y-1 flex items-center justify-center">
+                            <span>Send Feedback</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path
+                                    d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div id="feedback-success" class="hidden text-center py-8">
+                <div class="text-5xl mb-4">✨</div>
+                <h4 class="text-xl font-bold text-purple-200 mb-2">Thank You!</h4>
+                <p class="text-purple-300 mb-6">Your feedback has been received. We appreciate you taking the time to
+                    help us improve.</p>
+                <button id="feedback-close-btn"
+                    class="py-2 px-4 bg-purple-700 rounded-lg font-medium transition-all hover:bg-purple-600">
+                    Close
+                </button>
+            </div>
+            <div id="feedback-error" class="hidden text-center py-8">
+                <div class="text-5xl mb-4">😞</div>
+                <h4 class="text-xl font-bold text-purple-200 mb-2">Something Went Wrong</h4>
+                <p class="text-purple-300 mb-6">We couldn't send your feedback. Please try again later.</p>
+                <button id="feedback-retry-btn"
+                    class="py-2 px-4 bg-purple-700 rounded-lg font-medium transition-all hover:bg-purple-600 mr-2">
+                    Try Again
+                </button>
+                <button id="feedback-error-close-btn"
+                    class="py-2 px-4 bg-purple-700/50 rounded-lg font-medium transition-all hover:bg-purple-600/50">
+                    Close
+                </button>
+            </div>
         </div>
     </div>
 
@@ -127,14 +217,14 @@
     <script src="app.js"></script>
     <!-- Track a page view event -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Track page view
             if (window.va) {
                 window.va('event', {
                     name: 'pageview'
                 });
             }
-            
+
             // Track app initialization
             if (window.va) {
                 window.va('event', {
@@ -144,4 +234,5 @@
         });
     </script>
 </body>
-</html> 
+
+</html>
