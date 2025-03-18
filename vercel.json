@@ -1,19 +1,5 @@
 {
   "version": 2,
-  "buildCommand": "",
-  "devCommand": "",
-  "installCommand": "",
-  "public": true,
-  "outputDirectory": "",
-  "github": {
-    "silent": true
-  },
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ],
   "builds": [
     {
       "src": "**/*",
