@@ -736,6 +736,7 @@ function loadSuggestions() {
   }, 800); // Simulate a short loading time
 }
 
+
 function showSuggestionsLoading() {
   
   // Also update the reload button state
