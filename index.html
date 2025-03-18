@@ -4,12 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GratiJar | One sentence a day to fill your jar of gratitude</title>
+    <!-- Vercel Analytics -->
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#4c1d95">
 </head>
 
 <body class="bg-gradient-to-br from-indigo-900 to-purple-900 min-h-screen flex flex-col items-center text-white font-sans">
@@ -119,9 +125,23 @@
     </div>
 
     <script src="app.js"></script>
+    <!-- Track a page view event -->
     <script>
-        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track page view
+            if (window.va) {
+                window.va('event', {
+                    name: 'pageview'
+                });
+            }
+            
+            // Track app initialization
+            if (window.va) {
+                window.va('event', {
+                    name: 'app_init'
+                });
+            }
+        });
     </script>
-    <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html> 

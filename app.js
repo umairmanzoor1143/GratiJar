@@ -296,6 +296,16 @@ function handleSave() {
   saveBtn.disabled = true;
   saveBtn.innerHTML = '✓';
   
+  // Track note creation with Vercel Analytics
+  if (window.va) {
+    window.va('event', {
+      name: 'note_created',
+      data: { 
+        chars: text.length 
+      }
+    });
+  }
+  
   // Reset selected suggestion if any
   if (selectedSuggestion !== null) {
     const selectedEl = document.querySelector('.suggestion-item.selected');
@@ -534,6 +544,16 @@ function showAppreciationToast() {
 function shuffleNotes() {
   if (isShuffling || notes.length === 0) return;
   
+  // Track shuffle event
+  if (window.va) {
+    window.va('event', {
+      name: 'shuffle_notes',
+      data: { 
+        note_count: notes.length 
+      }
+    });
+  }
+  
   isShuffling = true;
   shuffleBtn.disabled = true;
   shuffleBtn.classList.add('loading');
@@ -586,7 +606,24 @@ function exportNotes() {
     modalTitle.textContent = '📔 Your Gratitude Journal is Empty';
     modalContent.innerHTML = '<p class="text-center py-4">No entries yet. Start adding some gratitude notes to fill your jar!</p>';
     modal.classList.add('modal-open');
+    
+    // Track export attempt with no notes
+    if (window.va) {
+      window.va('event', {
+        name: 'export_empty'
+      });
+    }
     return;
+  }
+  
+  // Track export event with note count
+  if (window.va) {
+    window.va('event', {
+      name: 'export_notes',
+      data: { 
+        note_count: notes.length 
+      }
+    });
   }
   
   // Sort notes by date (newest first)
@@ -656,6 +693,16 @@ function clearJar() {
   if (notes.length === 0) return;
   
   if (confirm('Are you sure you want to clear your jar? This action cannot be undone.')) {
+    // Track clear jar event
+    if (window.va) {
+      window.va('event', {
+        name: 'clear_jar',
+        data: { 
+          note_count: notes.length 
+        }
+      });
+    }
+    
     notes = [];
     saveNotes();
     renderNotes();
@@ -806,6 +853,16 @@ function selectSuggestion(index) {
   const suggestion = currentSuggestions[index];
   gratitudeInput.value = `I'm grateful for ${suggestion.text.toLowerCase()}: `;
   
+  // Track suggestion selection
+  if (window.va) {
+    window.va('event', {
+      name: 'suggestion_selected',
+      data: { 
+        type: suggestion.type || 'unknown'
+      }
+    });
+  }
+  
   // Focus the input and place cursor at the end
   gratitudeInput.focus();
   gratitudeInput.selectionStart = gratitudeInput.value.length;
@@ -818,6 +875,13 @@ function selectSuggestion(index) {
 // Reload suggestions button functionality
 async function handleReloadSuggestions() {
   if (isLoadingSuggestions) return;
+  
+  // Track suggestion reload
+  if (window.va) {
+    window.va('event', {
+      name: 'reload_suggestions'
+    });
+  }
   
   loadSuggestions();
   
